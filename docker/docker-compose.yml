@@ -12,21 +12,9 @@ services:
     ports:
       - "27017"
 
-  rabbitmq:
-    image: rabbitmq:management
-    restart: always
-    environment:
-      - "RABBITMQ_DEFAULT_USER=${RABBIT_USER}"
-      - "RABBITMQ_DEFAULT_PASS=${RABBIT_PASS}"
-    ports:
-      - "15672:15672"
-      - "5672:5672"
-
   pillarapp:
     image: coralproject/pillar:release
     restart: always
-    depends_on:
-      - rabbitmq
     environment:
       - "PILLAR_HOME=/opt/pillar"
       - "PILLAR_ADDRESS=:8080"
