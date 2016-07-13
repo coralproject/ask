@@ -1,0 +1,89 @@
+version: '2'
+services:
+  mongodata:
+    image: coralproject/mongodata
+    restart: always
+    environment:
+      - "MONGO_USER=${MONGO_USER}"
+      - "MONGO_PASS=${MONGO_PASS}"
+      - "MONGO_DB=${MONGO_DB}"
+    volumes:
+      - /mongodata:/data/db
+    ports:
+      - "27017"
+
+  rabbitmq:
+    image: rabbitmq:management
+    restart: always
+    environment:
+      - "RABBITMQ_DEFAULT_USER=${RABBIT_USER}"
+      - "RABBITMQ_DEFAULT_PASS=${RABBIT_PASS}"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
+  pillarapp:
+    image: coralproject/pillar:release
+    restart: always
+    depends_on:
+      - rabbitmq
+    environment:
+      - "PILLAR_HOME=/opt/pillar"
+      - "PILLAR_ADDRESS=:8080"
+      - "MONGODB_URL=mongodb://${MONGO_USER}:${MONGO_PASS}@mongo:27017/${MONGO_AUTHDB}"
+      - "AMQP_EXCHANGE=PillarMQ"
+      - "PILLAR_CRON=false"
+      - "PILLAR_CRON_SEARCH=@every 30m"
+      - "AMQP_URL=amqp://${RABBIT_USER}:${RABBIT_PASS}@rabbitmq:5672/"
+    ports:
+      - "8080:8080"
+    links:
+      - mongodata
+      - rabbitmq
+
+
+  cayapp:
+    image: coralproject/cay:release
+    restart: always
+    environment:
+      - "XENIA_URL=https://${FRONTEND_HOST}/xenia_api"
+      - "PILLAR_URL=https://${FRONTEND_HOST}/pillar_api"
+      - "ENV=staging"
+      - "PROJECT=Coral Project"
+      - "GAID=${GAID_VALUE}"
+      - "AUTH_TOKEN=${AUTH_TOKEN_VALUE}"
+    ports:
+      - "80:80"
+    links:
+      - pillarapp
+      - mongodata
+
+  elkhorn:
+    image: coralproject/elkhorn
+    #build: elkhorn
+    restart: always
+    environment:
+      - "PILLAR_URL=https://${FRONTEND_HOST}/pillar_api"
+      - "AUTH_TOKEN=${AUTH_TOKEN_VALUE}"
+      - "S3_BUCKET=${S3_BUCKET}"
+      - "AWS_REGION=${AWS_REGION}"
+      - "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}"
+      - "AWS_ACCESS_KEY=${AWS_ACCESS_KEY}"
+    ports:
+      - "4444:4444"
+    links:
+      - pillarapp:pillar
+
+
+  proxy:
+    image: nginx:stable-alpine
+    restart: always
+    volumes:
+      - ./proxy/:/etc/nginx/conf.d/
+      - /etc/ssl/certs/:/etc/ssl/certs/
+    links:
+      - pillarapp:pillar
+      - cayapp:cay
+    ports:
+      - "81:80"
+      - "443:443"
