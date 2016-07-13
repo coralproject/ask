@@ -19,10 +19,10 @@ services:
       - "PILLAR_HOME=/opt/pillar"
       - "PILLAR_ADDRESS=:8080"
       - "MONGODB_URL=mongodb://${MONGO_USER}:${MONGO_PASS}@mongo:27017/${MONGO_AUTHDB}"
-      - "AMQP_EXCHANGE=PillarMQ"
+      - "AMQP_EXCHANGE="
       - "PILLAR_CRON=false"
       - "PILLAR_CRON_SEARCH=@every 30m"
-      - "AMQP_URL=amqp://${RABBIT_USER}:${RABBIT_PASS}@rabbitmq:5672/"
+      - "AMQP_URL="
     ports:
       - "8080:8080"
     links:
