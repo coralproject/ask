@@ -1,0 +1,20 @@
+server {
+	listen       80 default;
+	server_name  _;
+
+	location "~(.+)?atoll.+" {
+		proxy_pass http://atoll;
+	}
+
+	location "~(.+)?cay.+" {
+		proxy_pass http://cay;
+	}
+
+	location "~(.+)?pillar.+" {
+		proxy_pass http://pillar;
+	}
+
+	location "~(.+)?xenia.+" {
+		proxy_pass http://xenia;
+	}
+}

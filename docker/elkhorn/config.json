@@ -1,0 +1,10 @@
+{
+ "pillarHost": "<no value>",
+ "basicAuthorization": "Basic <no value>",
+   "s3": {
+    "bucket": "<no value>",
+    "region": "<no value>",
+    "accessKeyId": "<no value>",
+    "secretAccessKey": "<no value>"
+  }
+}
