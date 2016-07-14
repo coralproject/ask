@@ -1,5 +1,5 @@
 {
- "pillarHost": "<no value>",
+ "pillarHost": "http://localhost:8080",
  "basicAuthorization": "Basic <no value>",
    "s3": {
     "bucket": "<no value>",
