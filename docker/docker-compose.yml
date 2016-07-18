@@ -46,8 +46,8 @@ services:
       - mongodata
 
   elkhorn:
-    image: coralproject/elkhorn
-    #build: elkhorn
+    #image: coralproject/elkhorn
+    build: elkhorn
     restart: always
     environment:
       - "PILLAR_URL=https://${FRONTEND_HOST}/pillar_api"
@@ -67,7 +67,7 @@ services:
     restart: always
     volumes:
       - ./proxy/:/etc/nginx/conf.d/
-      - /etc/ssl/certs/:/etc/ssl/certs/
+      - ./certs/:/etc/ssl/certs/
     links:
       - pillarapp:pillar
       - cayapp:cay
