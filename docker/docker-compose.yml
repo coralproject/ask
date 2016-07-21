@@ -1,0 +1,61 @@
+version: '2'
+services:
+  mongodata:
+    image: coralproject/mongodata
+    restart: always
+    environment:
+      - "MONGO_DUMP=https://s3.amazonaws.com/coral-demo-dataset/dump.tar.gz"
+      - "MONGO_USER=${MONGO_USER}"
+      - "MONGO_PASS=${MONGO_PASS}"
+      - "MONGO_DB=${MONGO_DB}"
+    volumes:
+      - /mongodata:/data/db
+    ports:
+      - "27017:27017"
+
+
+  pillarapp:
+    image: coralproject/pillar:release
+    restart: always
+    environment:
+        - "PILLAR_HOME=/opt/pillar"
+        - "PILLAR_ADDRESS=:8080"
+        - "MONGODB_URL=mongodb://${MONGO_USER}:${MONGO_PASS}@mongodata:27017/${MONGO_AUTHDB}"
+        - "PILLAR_CRON=false"
+        - "PILLAR_CRON_SEARCH=@every 30m"
+    ports:
+     - "8080:8080"
+    links:
+      - mongodata
+
+
+  cayapp:
+    image: coralproject/cay:release
+    restart: always
+    environment:
+       - "AUTH_TOKEN=NmQ3MmU2ZGQtOTNkMC00NDEzLTliNGMtODU0NmQ0ZDM1MTRlOlBDeVgvTFRHWjhOdGZWOGVReXZObkpydm4xc2loQk9uQW5TNFpGZGNFdnc9"
+       - "PILLAR_URL=http://${FRONTEND_HOST}:8080"
+       - "ELKHORN_URL=http://${FRONTEND_HOST}:4444"
+       - "ENV=Demo"
+       - "TRUST=false,"
+       - "PROJECT=Coral Project"
+    ports:
+      - "80:80"
+    links:
+      - pillarapp
+      - mongodata
+
+  elkhorn:
+    image: coralproject/elkhorn
+    restart: always
+    environment:
+       - "PILLAR_URL=http://${FRONTEND_HOST}:8080"
+       - "AUTH_TOKEN=NmQ3MmU2ZGQtOTNkMC00NDEzLTliNGMtODU0NmQ0ZDM1MTRlOlBDeVgvTFRHWjhOdGZWOGVReXZObkpydm4xc2loQk9uQW5TNFpGZGNFdnc9"
+       - "S3_BUCKET=nyt-demo"
+       - "AWS_REGION=us-east-1"
+       - "AWS_ACCESS_KEY_ID=AKIAIBEPK3W42XUZVHNA"
+       - "AWS_ACCESS_KEY=AvnsQPxAlDxRLO+7GYKpShpA8YcL0Dxd8frS19vE"
+    ports:
+      - "4444:4444"
+    links:
+      - pillarapp
