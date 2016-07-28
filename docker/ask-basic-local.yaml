@@ -46,7 +46,7 @@ services:
       - mongodata
 
   elkhorn:
-    image: coralproject/elkhorn
+    image: coralproject/elkhorn:release
     restart: always
     environment:
        - "PILLAR_URL=http://192.168.99.100:8080"
