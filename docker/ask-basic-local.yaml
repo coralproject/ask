@@ -51,10 +51,10 @@ services:
     environment:
        - "PILLAR_URL=http://192.168.99.100:8080"
        - "AUTH_TOKEN=NmQ3MmU2ZGQtOTNkMC00NDEzLTliNGMtODU0NmQ0ZDM1MTRlOlBDeVgvTFRHWjhOdGZWOGVReXZObkpydm4xc2loQk9uQW5TNFpGZGNFdnc9"
-       - "S3_BUCKET=nyt-demo"
-       - "AWS_REGION=us-east-1"
-       - "AWS_ACCESS_KEY_ID=AKIAIBEPK3W42XUZVHNA"
-       - "AWS_ACCESS_KEY=AvnsQPxAlDxRLO+7GYKpShpA8YcL0Dxd8frS19vE"
+       - "S3_BUCKET="
+       - "AWS_REGION="
+       - "AWS_ACCESS_KEY_ID="
+       - "AWS_ACCESS_KEY="
     ports:
       - "4444:4444"
     links:
