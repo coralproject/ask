@@ -20,7 +20,7 @@ services:
     environment:
         - "PILLAR_HOME=/opt/pillar"
         - "PILLAR_ADDRESS=:8080"
-        - "MONGODB_URL=mongodb://coraluser:welcome@mongodata:27017/coral"
+        - "MONGODB_URL=mongodb://coraluser:welcome@mongodata:27017/admin"
         - "PILLAR_CRON=false"
         - "PILLAR_CRON_SEARCH=@every 30m"
     ports:
