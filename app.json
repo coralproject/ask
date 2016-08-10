@@ -4,6 +4,12 @@
  "repository": "https://github.com/coralproject/ask",
  "keywords": ["ask"],
  "scripts": {
-    "postdeploy": "./docker/install-coral-loca.sh"
+    "postdeploy": "./heroku/install-coral-heroku.sh"
   },
+  "addons": [
+      {
+         "plan": "mongolab:shared-single-small",
+         "as": "MONGO"
+      }
+  ]
 }
