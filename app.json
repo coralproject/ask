@@ -6,10 +6,9 @@
  "scripts": {
     "postdeploy": "./heroku/install-coral-heroku.sh"
   },
-  "addons": [
+  "buildpacks": [
       {
-         "plan": "mongolab:shared-single-small",
-         "as": "MONGO"
+          "url": "https://github.com/coralproject/heroku-buildpack-coralproject"
       }
   ]
 }
