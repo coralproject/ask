@@ -1,0 +1,14 @@
+{
+ "name": "Ask",
+ "description": "Ask App",
+ "repository": "https://github.com/coralproject/ask",
+ "keywords": ["ask"],
+ "scripts": {
+    "postdeploy": "./heroku/install-coral-heroku.sh"
+  },
+  "buildpacks": [
+      {
+          "url": "https://github.com/coralproject/heroku-buildpack-coralproject"
+      }
+  ]
+}
