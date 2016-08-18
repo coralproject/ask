@@ -1,3 +1,7 @@
-# ask
+# Ask
+Ask is a tool that enables editors to create embeddable calls for contributions, including text, photo, video, and audio. The contributions can be connected to existing user profiles. Editors can manage high volumes of contributions, and display the best ones alongside the call.
 
-This is a temporary repo.  We are migrating all deployment flows to: [https://github.com/coralproject/install](https://github.com/coralproject/install)
+## Quickstart
+TODO: add deploy to Heroku button here
+
+Read more about Ask and how to install it on our Ask [user guide page](http://coralprojectdocs.herokuapp.com/user/ask).
