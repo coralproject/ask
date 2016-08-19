@@ -1,5 +1,5 @@
 # Ask
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/coralproject/ask/tree/feature/heroku)
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 Ask is a tool that enables editors to create embeddable calls for contributions, including text, photo, video, and audio. The contributions can be connected to existing user profiles. Editors can manage high volumes of contributions, and display the best ones in a gallery.
 
