@@ -4,7 +4,7 @@
  "repository": "https://github.com/coralproject/ask",
  "keywords": ["ask"],
  "scripts": {
-    "postdeploy": "./heroku/install-coral-heroku.sh"
+    "postdeploy": "./docker/install-coral-local.sh"
   },
   "buildpacks": [
       {
