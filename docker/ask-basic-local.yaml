@@ -4,7 +4,7 @@ services:
     image: coralproject/mongodata
     restart: always
     environment:
-      - "MONGO_DUMP=https://s3.amazonaws.com/coral-demo-dataset/dump.tar.gz"
+      - "MONGO_DUMP=https://s3.amazonaws.com/coral-demo-dataset/coral-ask-bootsrap-dataset.tar.gz"
       - "MONGO_USER=coraluser"
       - "MONGO_PASS=welcome"
       - "MONGO_DB=coral"
@@ -14,43 +14,45 @@ services:
       - "27017:27017"
 
 
-  pillarapp:
-    image: coralproject/pillar:release
+  askapp:
+    image: coralproject/askapp
     restart: always
     environment:
-        - "PILLAR_HOME=/opt/pillar"
-        - "PILLAR_ADDRESS=:8080"
-        - "MONGODB_URL=mongodb://coraluser:welcome@mongodata:27017/admin"
-        - "PILLAR_CRON=false"
-        - "PILLAR_CRON_SEARCH=@every 30m"
+      - "XENIA_MONGO_HOST=mongodata:27017"
+      - "XENIA_MONGO_AUTHDB=admin"
+      - "XENIA_MONGO_DB=coral"
+      - "XENIA_MONGO_USER=coraluser"
+      - "XENIA_MONGO_PASS=welcome"
+      - "XENIA_LOGGING_LEVEL=1"
+      - "XENIA_HOST=:4000"
     ports:
-     - "8080:8080"
+      - "4000:4000"
     links:
       - mongodata
-
 
   cayapp:
     image: coralproject/cay:release
     restart: always
     environment:
-       - "AUTH_TOKEN=NmQ3MmU2ZGQtOTNkMC00NDEzLTliNGMtODU0NmQ0ZDM1MTRlOlBDeVgvTFRHWjhOdGZWOGVReXZObkpydm4xc2loQk9uQW5TNFpGZGNFdnc9"
-       - "PILLAR_URL=http://192.168.99.100:8080"
+       - "AUTH_TOKEN=YumgdjeogwhG"
+       - "ASK_URL=http://192.168.99.100:4000"
        - "ELKHORN_URL=http://192.168.99.100:4444"
        - "ENV=Demo"
        - "TRUST=false,"
+        - "GAID=YU-8819hFR"
        - "PROJECT=Coral Project"
     ports:
       - "80:80"
     links:
-      - pillarapp
+      - askapp
       - mongodata
 
   elkhorn:
     image: coralproject/elkhorn:release
     restart: always
     environment:
-       - "PILLAR_URL=http://192.168.99.100:8080"
-       - "AUTH_TOKEN=NmQ3MmU2ZGQtOTNkMC00NDEzLTliNGMtODU0NmQ0ZDM1MTRlOlBDeVgvTFRHWjhOdGZWOGVReXZObkpydm4xc2loQk9uQW5TNFpGZGNFdnc9"
+       - "ASK_URL=http://192.168.99.100:4000"
+       - "AUTH_TOKEN=YumgdjeogwhG"
        - "S3_BUCKET="
        - "AWS_REGION="
        - "AWS_ACCESS_KEY_ID="
@@ -58,4 +60,4 @@ services:
     ports:
       - "4444:4444"
     links:
-      - pillarapp
+      - askapp
