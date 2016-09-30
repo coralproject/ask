@@ -3,15 +3,9 @@
  "description": "Ask App",
  "repository": "https://github.com/coralproject/ask",
  "keywords": ["ask"],
- "scripts": {
-    "postdeploy": "cd docker && docker-compose -f ask-basic-local.yaml up -d && docker-compose -f ask-basic-local.yaml down && docker-compose -f ask-basic-local.yaml up -d"
-  },
-  "buildpacks": [
-      {
-          "url": "https://github.com/coralproject/heroku-buildpack-coralproject"
-      },
-      {
-        "url": "heroku/go"
-      }
-  ]
+ "addons": [
+   {
+     "plan": "mongolab"
+   }
+ ]
 }
