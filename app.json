@@ -11,6 +11,6 @@
  "buildpacks": [
    {
      "url": "https://github.com/coralproject/heroku-buildpack-coralproject"
-   },
+   }
  ]
 }
