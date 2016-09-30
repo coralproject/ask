@@ -4,7 +4,7 @@ services:
     image: coralproject/mongodata
     restart: always
     environment:
-      - "MONGO_DUMP=https://s3.amazonaws.com/coral-demo-dataset/dump.tar.gz"
+      - "MONGO_DUMP=https://s3.amazonaws.com/coral-demo-dataset/coral-ask-bootsrap-dataset.tar.gz"
       - "MONGO_USER=${MONGO_USER}"
       - "MONGO_PASS=${MONGO_PASS}"
       - "MONGO_DB=${MONGO_DB}"
@@ -14,17 +14,19 @@ services:
       - "27017:27017"
 
 
-  pillarapp:
-    image: coralproject/pillar:release
+askapp:
+    image: coralproject/askapp
     restart: always
     environment:
-        - "PILLAR_HOME=/opt/pillar"
-        - "PILLAR_ADDRESS=:8080"
-        - "MONGODB_URL=mongodb://${MONGO_USER}:${MONGO_PASS}@mongodata:27017/${MONGO_AUTHDB}"
-        - "PILLAR_CRON=false"
-        - "PILLAR_CRON_SEARCH=@every 30m"
+      - "XENIA_MONGO_HOST=mongodata:27017"
+      - "XENIA_MONGO_AUTHDB=admin"
+      - "XENIA_MONGO_DB=${MONGO_DB}"
+      - "XENIA_MONGO_USER=${MONGO_USER}"
+      - "XENIA_MONGO_PASS=${MONGO_PASS}"
+      - "XENIA_LOGGING_LEVEL=1"
+      - "XENIA_HOST=:4000"
     ports:
-     - "8080:8080"
+      - "4000:4000"
     links:
       - mongodata
 
@@ -33,29 +35,30 @@ services:
     image: coralproject/cay:release
     restart: always
     environment:
-       - "AUTH_TOKEN=NmQ3MmU2ZGQtOTNkMC00NDEzLTliNGMtODU0NmQ0ZDM1MTRlOlBDeVgvTFRHWjhOdGZWOGVReXZObkpydm4xc2loQk9uQW5TNFpGZGNFdnc9"
-       - "PILLAR_URL=http://${FRONTEND_HOST}:8080"
+       - "AUTH_TOKEN=${AUTH_TOKEN}"
+       - "ASK_URL=http://${FRONTEND_HOST}:4000"
        - "ELKHORN_URL=http://${FRONTEND_HOST}:4444"
        - "ENV=Demo"
        - "TRUST=false,"
+       - "GAID=${GAID}"
        - "PROJECT=Coral Project"
     ports:
       - "80:80"
     links:
-      - pillarapp
+      - askapp
       - mongodata
 
   elkhorn:
     image: coralproject/elkhorn:release
     restart: always
     environment:
-       - "PILLAR_URL=http://${FRONTEND_HOST}:8080"
-       - "AUTH_TOKEN=NmQ3MmU2ZGQtOTNkMC00NDEzLTliNGMtODU0NmQ0ZDM1MTRlOlBDeVgvTFRHWjhOdGZWOGVReXZObkpydm4xc2loQk9uQW5TNFpGZGNFdnc9"
-       - "S3_BUCKET=nyt-demo"
-       - "AWS_REGION=us-east-1"
-       - "AWS_ACCESS_KEY_ID=AKIAIBEPK3W42XUZVHNA"
-       - "AWS_ACCESS_KEY=AvnsQPxAlDxRLO+7GYKpShpA8YcL0Dxd8frS19vE"
+       - "ASK_URL=http://${FRONTEND_HOST}:4000"
+       - "AUTH_TOKEN=${AUTH_TOKEN}"
+       - "S3_BUCKET=${S3_BUCKET}"
+       - "AWS_REGION=${AWS_REGION}"
+       - "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}"
+       - "AWS_ACCESS_KEY=${AWS_ACCESS_KEY}"
     ports:
       - "4444:4444"
     links:
-      - pillarapp
+      - askapp
