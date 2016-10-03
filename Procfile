@@ -1,1 +1,1 @@
-web: sh $HOME/heroku/install-coral-local.sh
+web: sh $HOME/heroku/install-coral-heroku.sh
