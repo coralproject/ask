@@ -15,5 +15,5 @@
  ],
  "scripts": {
     "postdeploy": "$HOME/heroku/install-coral-heroku.sh"
-  },
+  }
 }
