@@ -12,8 +12,5 @@
    {
      "url": "https://github.com/coralproject/heroku-buildpack-coralproject"
    }
- ],
- "scripts": {
-    "postdeploy": "$HOME/heroku/install-coral-heroku.sh"
-  },
+ ]
 }
