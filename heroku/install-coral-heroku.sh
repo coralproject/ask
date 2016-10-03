@@ -14,21 +14,6 @@ export PATH=$PATH:$HOME/go/bin
 export GOROOT=$HOME/go
 export GOPATH=$HOME
 
-# Install Pillar, if necessary
-if [ ! -d "$GOPATH/src/github.com/coralproject/pillar" ]; then
-  go get github.com/coralproject/pillar
-  cd $GOPATH/src/github.com/coralproject/pillar
-  cp config/dev.cfg config/custom.cfg
-  sed -i '2d' config/custom.cfg
-  cd $HOME
-fi
-source $GOPATH/src/github.com/coralproject/pillar/config/custom.cfg
-export MONGODB_URL=$MONGODB_URI
-cd $GOPATH/src/github.com/coralproject/pillar/app/pillar
-go build
-$GOPATH/src/github.com/coralproject/pillar/app/pillar/pillar &
-cd $HOME
-
 # Install askd via Shelf, if necessary
 if [ ! -d "$GOPATH/src/github.com/coralproject/shelf" ]; then
   go get github.com/coralproject/shelf
@@ -95,6 +80,7 @@ EOF
   sed -i "s/server.listen(3000, 'localhost', function(err) {/server.listen($PORT, 'localhost', function(err) {/g" dev-server.js
   cd $HOME
 fi
+mv $HOME/cay/src/app/layout/Sidebar/* $HOME/cay/src/app/layout/sidebar
 cd cay
 npm install
 npm start
