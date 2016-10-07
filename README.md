@@ -5,4 +5,4 @@ Ask is a tool that enables editors to create embeddable calls for contributions,
 
 Ask is designed to facilitate engagement among all readers, journalists, editors, and publishers, in order to promote user-generated content that improves the quality and relevancy of journalism within communities.
 
-Read more about Ask and how to install it on our Ask [user guide page](http://coralprojectdocs.herokuapp.com/user/ask).
+Read more about Ask and how to install it on our Ask [user guide page](https://docs.coralproject.net/user/ask/).
