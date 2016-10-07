@@ -39,7 +39,7 @@ askapp:
        - "ASK_URL=http://${FRONTEND_HOST}:4000"
        - "ELKHORN_URL=http://${FRONTEND_HOST}:4444"
        - "ENV=Demo"
-       - "TRUST=false,"
+       - "TRUST=false"
        - "GAID=${GAID}"
        - "PROJECT=Coral Project"
     ports:
