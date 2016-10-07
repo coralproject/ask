@@ -38,7 +38,7 @@ services:
        - "ASK_URL=http://192.168.99.100:4000"
        - "ELKHORN_URL=http://192.168.99.100:4444"
        - "ENV=Demo"
-       - "TRUST=false,"
+       - "TRUST=false"
         - "GAID=YU-8819hFR"
        - "PROJECT=Coral Project"
     ports:
