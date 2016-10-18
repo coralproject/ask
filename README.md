@@ -12,4 +12,4 @@ Read more about Ask and how to install it on our Ask [user guide page](http://co
 You can easily [deploy Ask on Heroku](https://heroku.com/deploy) for quick prototyping. Please note that Ask on Heroku doesn't support authentication, so it is not recommended for production use.
 
 ### On-Premise Installer
-Please stay tuned. We will release a package to install Ask on your own servers shortly!
+Please stay tuned. We're updating our package to install Ask on your own servers. If you have questions, please email jeff@mozillafoundation.org.
