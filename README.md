@@ -7,5 +7,7 @@ Ask is designed to facilitate engagement among all readers, journalists, editors
 Read more about Ask and how to install it on our Ask [user guide page](http://coralprojectdocs.herokuapp.com/user/ask).
 
 ## Installation
-To install Ask, you can use the Ask Installer. You can find that here: github.com/coralproject/ask-install.
-If you have questions, please email jeff@mozillafoundation.org.
+To install Ask, you can use the Ask Installer. You can find that here: [github.com/coralproject/ask-install](https://github.com/coralproject/ask-install).
+
+## Support
+If you have questions or need help installing Ask, please email jeff@mozillafoundation.org.
