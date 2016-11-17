@@ -4,10 +4,10 @@ Ask is a tool that enables editors to create embeddable calls for contributions,
 
 Ask is designed to facilitate engagement among all readers, journalists, editors, and publishers, in order to promote user-generated content that improves the quality and relevancy of journalism within communities.
 
-Read more about Ask and how to install it on our Ask [user guide page](http://coralprojectdocs.herokuapp.com/user/ask).
+Read more about Ask [on our website.](https://coralproject.net/products/ask.html)
 
 ## Installation
-To install Ask, you can use the Ask Installer. You can find that here: [github.com/coralproject/ask-install](https://github.com/coralproject/ask-install).
+To install Ask, [follow the instructions detailed here.](https://docs.coralproject.net/products/ask/) You can also [download the precompiled binary here.](https://github.com/coralproject/ask-install)
 
 ## Support
 If you have questions or need help installing Ask, please email jeff@mozillafoundation.org.
